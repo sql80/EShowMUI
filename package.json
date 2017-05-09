@@ -1,0 +1,20 @@
+{
+  "name": "EShow_mb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sql80/EShow_mb.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sql80/EShow_mb/issues"
+  },
+  "homepage": "https://github.com/sql80/EShow_mb#readme"
+}
