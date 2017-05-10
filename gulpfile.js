@@ -4,7 +4,7 @@ var fs = require('fs');
 var gulp = require('gulp');
 var less = require('gulp-less');
 var header = require('gulp-header');
-var nano = require('gulp-cssnano');
+var cssclean = require('gulp-clean-css');
 var postcss = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
 var rename = require('gulp-rename');
@@ -13,6 +13,7 @@ var browserSync = require('browser-sync');
 var concat      = require("gulp-concat");//文件合并
 var pkg = require('./package.json');
 var runSequence = require('gulp-sequence');
+var fileinclude  = require('gulp-file-include');
 var yargs = require('yargs')
     .options({
         'w': {
@@ -57,40 +58,62 @@ gulp.task('build:style', function (){
 
     var banner = [
         '/*!',
-        ' * EShowmb样式表 v<%= pkg.version %>',
+        ' * <%=  name %>样式表 v<%= pkg.version %>',
         ' * @author sql80',
         ' * @email sql80@live.com',
-        ' * @time <%=  name %>',
+        ' * @Home sql80.com',
+        ' * @time <%=  day %>',
         ' */',
         ''].join('\n');
-    gulp.src('src/css/main.less', option)
+    gulp.src('src/less/eshowmui.less', option)
         .pipe(sourcemaps.init())
         .pipe(less().on('error', function (e) {
             console.error(e.message);
             this.emit('end');
         }))
         .pipe(postcss([autoprefixer(['iOS >= 7', 'Android >= 4.1'])]))
-        .pipe(header(banner, { pkg : pkg ,name:day} ))
+        .pipe(header(banner, { pkg : pkg ,day:day,name:'EShowMUI'} ))
         .pipe(sourcemaps.write())
-        .pipe(concat('/css/style.css'))
+        .pipe(concat('/css/eshowmui.css'))
         .pipe(gulp.dest(build))
-        .pipe(browserSync.reload({stream: true}))
-        .pipe(nano({
-            zindex: false,
-            autoprefixer: false
-        }))
+
+        .pipe(cssclean())
         .pipe(rename(function (path) {
             path.basename += '.min';
         }))
-        .pipe(gulp.dest(build));
+        .pipe(gulp.dest(build))
+        .pipe(browserSync.reload({stream: true}));
+        gulp.src('src/less/demo.less',option)
+        .pipe(less().on('error', function (e) {
+            console.error(e.message);
+            this.emit('end');
+        }))
+        .pipe(postcss([autoprefixer(['iOS >= 7', 'Android >= 4.1'])]))
+        .pipe(header(banner, { pkg : pkg ,day:day,name:'demo样式'} ))
+        .pipe(sourcemaps.write())
+        .pipe(concat('/css/demo.css'))
+        .pipe(gulp.dest(build))
+        .pipe(cssclean())
+        .pipe(rename(function (path) {
+            path.basename += '.min';
+        }))
+        .pipe(gulp.dest(build))
+        .pipe(browserSync.reload({stream: true}));
 });
 
 gulp.task('build:assets', function (){
-    gulp.src('src/**/*.?(js|html|css)', option)
+    gulp.src('src/**/*.?(js|css)', option)
         .pipe(gulp.dest(build))
-    gulp.src('src/pulgs/*', option)
+        gulp.src('src/**/*.html')
+              .pipe(fileinclude({
+                prefix: '@@',
+                basepath: '@file'
+              }))
+
         .pipe(gulp.dest(build))
-        .pipe(browserSync.reload({stream: true}));
+
+        .pipe(browserSync.reload({stream: true}))
+
 });
 
 gulp.task('build:images', function (){
@@ -103,12 +126,13 @@ gulp.task('build:images', function (){
 
 
 
+
 gulp.task('release', function(cb) {
     runSequence('build:assets','build:style','build:images')(cb);
 })
 
 gulp.task('watch', ['release'], function () {
-    gulp.watch('src/css/*', ['build:style']);
+    gulp.watch('src/less/**/*', ['build:style']);
     gulp.watch('src/**/*.?(js|html)', ['build:assets']);
     gulp.watch('src/**/*.html');
 
