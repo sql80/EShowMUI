@@ -6,13 +6,16 @@ EShowMUI 为移动 Web 服务量身设计
 ## 概述
 
 EShowMUI 是一套适用于微信端的html静态资源，由ForDesign.Me设计团队为到群网 移动Web 开发量身设计，可以令用户的使用感知更加统一。
-包含`button`、`cell`、`dialog`、 `toast`、`article`、`icon`等各式元素。
+包含`基础按钮`、`图标`、`输入框`、 `列表`、`通知`、`表格`等。
+截止 2017年7月，没有特殊情况 就不再更新了
+
+本UI使用Gulp自动化构建工具，您可以使用其编译LESS、JavaScript、html等文件，将可以极大的提高您的开发效率。
 
 ## 手机预览
-
+点击 [预览地址](https://sql80.github.io/EShowMUI/build/pages/index.html).
 
 ## 文档
-
+内容很少，不用文档了吧
 
 
 
