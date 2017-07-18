@@ -24,7 +24,7 @@ EShowmb = {
         handle = setInterval(function() {
             if (time > 0) {
                 time = time - 1;
-                $("#"+btn).html(time+"秒");
+                $("#"+btn).html(time+"秒"); 
             } else {
                 $("#"+btn).html("获取");
                 $("#"+btn).attr("disabled", false);
