@@ -14,8 +14,10 @@ EShowMUI 是一套适用于微信端的html静态资源，由ForDesign.Me设计�
 ## 手机预览
 点击 [预览地址](https://sql80.github.io/EShowMUI/build/pages/index.html).
 
-## 文档
-内容很少，不用文档了吧
+## 说明
+sub/下为页面组件
+widget/下为基础样式
+
 
 
 
