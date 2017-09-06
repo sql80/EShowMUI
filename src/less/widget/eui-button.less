@@ -93,6 +93,23 @@ input {
   }
 }
 
+
+
+.eui-btn-success {
+  background-color: @euiBtnPlainSuccessColor;
+
+  &:not(.eui-btn-disabled):visited {
+    color: @white;
+  }
+
+  &:not(.eui-btn-disabled):active {
+    color: @euiBtnPlainSuccessColor;
+    background-color: @euiBtnPlainSuccessColor;
+  }
+}
+
+
+
 .eui-btn-warn {
   background-color: @euiBtnWarnBg;
 
@@ -130,6 +147,21 @@ input {
   &:not(.eui-btn-plain-disabled):active {
     color: @euiBtnPlainPrimaryActiveColor;
     border-color: @euiBtnPlainPrimaryActiveBorderColor;
+  }
+
+  &:after {
+    border-width: 0;
+  }
+}
+
+
+.eui-btn-plain-success {
+  color: @euiBtnPlainSuccessColor;
+  border: 1px solid @euiBtnPlainSuccessColor;
+
+  &:not(.eui-btn-plain-disabled):active {
+    color: @euiBtnPlainSuccessColor;
+    border-color: @euiBtnPlainSuccessColor;
   }
 
   &:after {
